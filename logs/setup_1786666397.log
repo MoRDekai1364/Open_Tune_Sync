@@ -1,0 +1,10 @@
+[00:13:17] === OpenTune Sync setup starting ===
+[00:13:17] Project root: D:\Programming\Personal_projects_D\Open_Tune_Sync\
+[00:13:18] Checking Python (need >= 3.8)...
+[00:13:19] Using Python command: python
+[00:13:19] Python  OK.
+[00:13:20] Checking pip availability...
+[00:13:21] pip OK.
+[00:13:22] Installing/verifying required libraries...
+[00:13:23] flask: already installed.
+[00:13:24] Entry file located: D:\Programming\Personal_projects_D\Open_Tune_Sync\opentune_sync.py

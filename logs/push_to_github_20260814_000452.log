@@ -1,0 +1,102 @@
+2026-08-14 00:04:52,826 [INFO] Source folder: D:\Programming\Personal_projects_D\Open_Tune_Sync
+2026-08-14 00:04:52,827 [INFO] Temp log: C:\Users\MORDEK~1\AppData\Local\Temp\push_to_github_20260814_000452.log
+2026-08-14 00:04:52,827 [DEBUG] Running: git --version
+2026-08-14 00:04:52,990 [DEBUG] stdout: git version 2.55.0.windows.2
+2026-08-14 00:04:52,990 [DEBUG] stderr: 
+2026-08-14 00:04:52,990 [INFO] Existing git repository detected.
+2026-08-14 00:04:52,990 [DEBUG] Running: git remote -v
+2026-08-14 00:04:53,152 [DEBUG] stdout: origin	https://github.com/MoRDekai1364/Open_Tune_Sync.git (fetch)
+origin	https://github.com/MoRDekai1364/Open_Tune_Sync.git (push)
+2026-08-14 00:04:53,153 [DEBUG] stderr: 
+2026-08-14 00:04:53,153 [INFO] Detected remotes:
+2026-08-14 00:04:53,153 [INFO]   1. origin -> https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-14 00:04:53,154 [INFO]   2. Enter a new repository URL
+2026-08-14 00:04:53,154 [INFO] Verifying repository access.
+2026-08-14 00:04:53,155 [DEBUG] Running: git ls-remote https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-14 00:04:54,062 [DEBUG] stdout: 3a5a44662b2a581ac3f5a5eb7aa863acab3df931	HEAD
+3a5a44662b2a581ac3f5a5eb7aa863acab3df931	refs/heads/main
+2026-08-14 00:04:54,063 [DEBUG] stderr: 
+2026-08-14 00:04:54,063 [DEBUG] Running: git branch --list
+2026-08-14 00:04:54,234 [DEBUG] stdout: * main
+2026-08-14 00:04:54,234 [DEBUG] stderr: 
+2026-08-14 00:04:54,234 [DEBUG] Running: git ls-remote --heads origin
+2026-08-14 00:04:55,104 [DEBUG] stdout: 3a5a44662b2a581ac3f5a5eb7aa863acab3df931	refs/heads/main
+2026-08-14 00:04:55,104 [DEBUG] stderr: 
+2026-08-14 00:04:55,104 [INFO] Detected branches:
+2026-08-14 00:04:55,104 [INFO]   1. main
+2026-08-14 00:04:55,105 [INFO]   2. Enter a new branch name
+2026-08-14 00:04:55,105 [DEBUG] Running: git branch --list
+2026-08-14 00:04:55,269 [DEBUG] stdout: * main
+2026-08-14 00:04:55,269 [DEBUG] stderr: 
+2026-08-14 00:04:55,269 [DEBUG] Running: git checkout main
+2026-08-14 00:04:55,454 [DEBUG] stdout: M	README.md
+M	push_to_github.py
+Your branch is up to date with 'origin/main'.
+2026-08-14 00:04:55,454 [DEBUG] stderr: Already on 'main'
+2026-08-14 00:04:56,444 [INFO] No commit message entered — using: (this is automated commit message) 2026-08-14 00:04:56
+2026-08-14 00:04:56,445 [DEBUG] Running: git add -A
+2026-08-14 00:04:56,633 [DEBUG] stdout: 
+2026-08-14 00:04:56,633 [DEBUG] stderr: warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'push_to_github.py', LF will be replaced by CRLF the next time Git touches it
+2026-08-14 00:04:56,633 [DEBUG] Running: git status --porcelain
+2026-08-14 00:04:56,802 [DEBUG] stdout: M  README.md
+A  logs/push_to_github_20260814_000004.log
+M  push_to_github.py
+2026-08-14 00:04:56,802 [DEBUG] stderr: 
+2026-08-14 00:04:56,802 [DEBUG] Running: git commit -m (this is automated commit message) 2026-08-14 00:04:56
+2026-08-14 00:04:57,107 [DEBUG] stdout: [main f56e2c2] (this is automated commit message) 2026-08-14 00:04:56
+ 3 files changed, 186 insertions(+), 43 deletions(-)
+ create mode 100644 logs/push_to_github_20260814_000004.log
+2026-08-14 00:04:57,107 [DEBUG] stderr: 
+2026-08-14 00:04:57,107 [INFO] Checking for remote changes before pushing.
+2026-08-14 00:04:57,107 [DEBUG] Running: git fetch origin
+2026-08-14 00:04:58,147 [DEBUG] stdout: 
+2026-08-14 00:04:58,147 [DEBUG] stderr: 
+2026-08-14 00:04:58,147 [DEBUG] Running: git rev-parse --verify --quiet origin/main
+2026-08-14 00:04:58,307 [DEBUG] stdout: 3a5a44662b2a581ac3f5a5eb7aa863acab3df931
+2026-08-14 00:04:58,307 [DEBUG] stderr: 
+2026-08-14 00:04:58,307 [DEBUG] Running: git rev-parse main
+2026-08-14 00:04:58,467 [DEBUG] stdout: f56e2c2bc52b0079f2a063ea2f7df2c5fc061de9
+2026-08-14 00:04:58,467 [DEBUG] stderr: 
+2026-08-14 00:04:58,467 [DEBUG] Running: git rev-parse origin/main
+2026-08-14 00:04:58,624 [DEBUG] stdout: 3a5a44662b2a581ac3f5a5eb7aa863acab3df931
+2026-08-14 00:04:58,624 [DEBUG] stderr: 
+2026-08-14 00:04:58,624 [DEBUG] Running: git rev-list --count main..origin/main
+2026-08-14 00:04:58,784 [DEBUG] stdout: 0
+2026-08-14 00:04:58,784 [DEBUG] stderr: 
+2026-08-14 00:04:58,784 [DEBUG] Running: git push -u origin main --progress
+2026-08-14 00:05:01,381 [DEBUG] Enumerating objects: 10, done.
+2026-08-14 00:05:01,381 [DEBUG] Counting objects:  10% (1/10)
+2026-08-14 00:05:01,382 [DEBUG] Counting objects:  20% (2/10)
+2026-08-14 00:05:01,382 [DEBUG] Counting objects:  30% (3/10)
+2026-08-14 00:05:01,382 [DEBUG] Counting objects:  40% (4/10)
+2026-08-14 00:05:01,382 [DEBUG] Counting objects:  50% (5/10)
+2026-08-14 00:05:01,382 [DEBUG] Counting objects:  60% (6/10)
+2026-08-14 00:05:01,383 [DEBUG] Counting objects:  70% (7/10)
+2026-08-14 00:05:01,383 [DEBUG] Counting objects:  80% (8/10)
+2026-08-14 00:05:01,384 [DEBUG] Counting objects:  90% (9/10)
+2026-08-14 00:05:01,384 [DEBUG] Counting objects: 100% (10/10)
+2026-08-14 00:05:01,384 [DEBUG] Counting objects: 100% (10/10), done.
+2026-08-14 00:05:01,384 [DEBUG] Delta compression using up to 16 threads
+2026-08-14 00:05:01,384 [DEBUG] Compressing objects:  16% (1/6)
+2026-08-14 00:05:01,385 [DEBUG] Compressing objects:  33% (2/6)
+2026-08-14 00:05:01,385 [DEBUG] Compressing objects:  50% (3/6)
+2026-08-14 00:05:01,386 [DEBUG] Compressing objects:  66% (4/6)
+2026-08-14 00:05:01,386 [DEBUG] Compressing objects:  83% (5/6)
+2026-08-14 00:05:01,386 [DEBUG] Compressing objects: 100% (6/6)
+2026-08-14 00:05:01,386 [DEBUG] Compressing objects: 100% (6/6), done.
+2026-08-14 00:05:01,388 [DEBUG] Writing objects:  16% (1/6)
+2026-08-14 00:05:01,388 [DEBUG] Writing objects:  33% (2/6)
+2026-08-14 00:05:01,389 [DEBUG] Writing objects:  50% (3/6)
+2026-08-14 00:05:01,389 [DEBUG] Writing objects:  66% (4/6)
+2026-08-14 00:05:01,389 [DEBUG] Writing objects:  83% (5/6)
+2026-08-14 00:05:01,389 [DEBUG] Writing objects: 100% (6/6)
+2026-08-14 00:05:01,390 [DEBUG] Writing objects: 100% (6/6), 4.11 KiB | 1.37 MiB/s, done.
+2026-08-14 00:05:01,390 [DEBUG] Total 6 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+2026-08-14 00:05:02,521 [DEBUG] remote: Resolving deltas:   0% (0/1)
+2026-08-14 00:05:02,521 [DEBUG] remote: Resolving deltas: 100% (1/1)
+2026-08-14 00:05:02,521 [DEBUG] remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+2026-08-14 00:05:02,878 [DEBUG] To https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-14 00:05:02,878 [DEBUG] 3a5a446..f56e2c2  main -> main
+2026-08-14 00:05:02,908 [DEBUG] branch 'main' set up to track 'origin/main'.
+2026-08-14 00:05:02,920 [INFO] Push finished in 4.1s. Done.
