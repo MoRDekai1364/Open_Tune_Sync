@@ -1977,6 +1977,17 @@ input[type=checkbox] { accent-color: var(--green); cursor: pointer; width: 14px;
                   </div>
                 </div>
               </div>
+              <div class="wiz-action-row" style="border-color:rgba(255,180,0,.35)">
+                <div class="wiz-action-icon">👤</div>
+                <div class="wiz-action-text">
+                  <div class="wiz-action-title">Add every account you'll sync as a Test user</div>
+                  <div class="wiz-action-sub">
+                    New Google Cloud projects start in <b style="color:var(--text)">Testing</b> mode — only accounts you list here are allowed to log in, everyone else gets an "access blocked" screen.<br>
+                    Go to <b style="color:var(--text)">APIs &amp; Services → OAuth consent screen → Audience</b> (or <b style="color:var(--text)">Test users</b> on older layouts) → <b style="color:var(--text)">+ Add users</b> → enter the Gmail address of <b style="color:var(--amber)">every</b> Google/YouTube account you plan to connect below (yours, family, etc.) → Save.<br>
+                    You can add up to 100 accounts this way — no need to publish or verify the app for personal use.
+                  </div>
+                </div>
+              </div>
               <div class="wiz-action-row">
                 <div class="wiz-action-icon">⬇️</div>
                 <div class="wiz-action-text">
@@ -2424,6 +2435,20 @@ async function init() {
   }
 
   // Check if redirected back from OAuth
+  // Check if redirected back from OAuth
+  if (location.search.includes('auth=error')) {
+    const params = new URLSearchParams(location.search);
+    history.replaceState({}, '', '/');
+    const rawMsg = params.get('msg') || 'unknown_error';
+    if (rawMsg === 'access_denied') {
+      toast('Google blocked this account — add it as a Test user in your OAuth consent screen (see Setup → Test users step), or use an account that\'s already listed.', 'error');
+    } else if (rawMsg === 'no_code') {
+      toast('Google sign-in was cancelled or did not return a code — try connecting again.', 'error');
+    } else {
+      toast(`Connection failed: ${rawMsg}`, 'error');
+    }
+  }
+
   if (location.search.includes('auth=success')) {
     history.replaceState({}, '', '/');
     const s2 = await api('/api/status');
@@ -2649,6 +2674,10 @@ async function activateProject(idx) {
   await api(`/api/credentials/${idx}/activate`, { method: 'POST' });
   const s = await api('/api/status');
   renderProjects(s.credentials || []);
+  S.yt.playlists = [];
+  await refreshYTPlaylists();
+  if (document.getElementById('view-playlists').classList.contains('active')) refreshBackupPlaylists();
+  if (document.getElementById('view-sync').classList.contains('active')) refreshSyncUI();
   toast('Active project switched', 'success');
 }
 
