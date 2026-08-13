@@ -1,0 +1,59 @@
+2026-08-13 23:53:30,756 [INFO] Source folder: D:\Programming\Personal_projects_D\Open_Tune_Sync
+2026-08-13 23:53:30,757 [INFO] Temp log: C:\Users\MORDEK~1\AppData\Local\Temp\push_to_github_20260813_235330.log
+2026-08-13 23:53:30,757 [DEBUG] Running: git --version
+2026-08-13 23:53:30,947 [DEBUG] stdout: git version 2.55.0.windows.2
+2026-08-13 23:53:30,948 [DEBUG] stderr: 
+2026-08-13 23:53:30,948 [INFO] Existing git repository detected.
+2026-08-13 23:53:30,948 [DEBUG] Running: git remote -v
+2026-08-13 23:53:31,107 [DEBUG] stdout: origin	https://github.com/MoRDekai1364/Open_Tune_Sync.git (fetch)
+origin	https://github.com/MoRDekai1364/Open_Tune_Sync.git (push)
+2026-08-13 23:53:31,107 [DEBUG] stderr: 
+2026-08-13 23:53:31,109 [INFO] Detected remotes:
+2026-08-13 23:53:31,110 [INFO]   1. origin -> https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-13 23:53:31,110 [INFO]   2. Enter a new repository URL
+2026-08-13 23:53:33,997 [INFO] Verifying repository access.
+2026-08-13 23:53:33,997 [DEBUG] Running: git ls-remote https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-13 23:53:34,960 [DEBUG] stdout: 9237331d237860fb877430f0a9464e86c84d6cce	HEAD
+9237331d237860fb877430f0a9464e86c84d6cce	refs/heads/main
+2026-08-13 23:53:34,960 [DEBUG] stderr: 
+2026-08-13 23:53:34,960 [DEBUG] Running: git branch --list
+2026-08-13 23:53:35,127 [DEBUG] stdout: * main
+2026-08-13 23:53:35,127 [DEBUG] stderr: 
+2026-08-13 23:53:35,127 [DEBUG] Running: git ls-remote --heads origin
+2026-08-13 23:53:35,993 [DEBUG] stdout: 9237331d237860fb877430f0a9464e86c84d6cce	refs/heads/main
+2026-08-13 23:53:35,993 [DEBUG] stderr: 
+2026-08-13 23:53:35,994 [INFO] Detected branches:
+2026-08-13 23:53:35,994 [INFO]   1. main
+2026-08-13 23:53:35,994 [INFO]   2. Enter a new branch name
+2026-08-13 23:53:37,530 [DEBUG] Running: git branch --list
+2026-08-13 23:53:37,688 [DEBUG] stdout: * main
+2026-08-13 23:53:37,688 [DEBUG] stderr: 
+2026-08-13 23:53:37,688 [DEBUG] Running: git checkout main
+2026-08-13 23:53:37,891 [DEBUG] stdout: D	logs/push_to_github_20260813_234711.log
+D	logs/sys_sync.log
+M	opentune_sync.py
+2026-08-13 23:53:37,892 [DEBUG] stderr: Already on 'main'
+2026-08-13 23:53:57,172 [DEBUG] Running: git add -A
+2026-08-13 23:53:57,349 [DEBUG] stdout: 
+2026-08-13 23:53:57,350 [DEBUG] stderr: warning: in the working copy of 'opentune_sync.py', LF will be replaced by CRLF the next time Git touches it
+2026-08-13 23:53:57,350 [DEBUG] Running: git status --porcelain
+2026-08-13 23:53:57,514 [DEBUG] stdout: D  logs/push_to_github_20260813_234711.log
+D  logs/sys_sync.log
+M  opentune_sync.py
+2026-08-13 23:53:57,514 [DEBUG] stderr: 
+2026-08-13 23:53:57,514 [DEBUG] Running: git commit -m Added multiple accounts and google cloud project creation guide
+2026-08-13 23:53:57,814 [DEBUG] stdout: [main 2260493] Added multiple accounts and google cloud project creation guide
+ 3 files changed, 29 insertions(+), 39 deletions(-)
+ delete mode 100644 logs/push_to_github_20260813_234711.log
+ delete mode 100644 logs/sys_sync.log
+2026-08-13 23:53:57,814 [DEBUG] stderr: 
+2026-08-13 23:53:57,814 [DEBUG] Running: git push -u origin main --progress
+2026-08-13 23:54:00,751 [DEBUG] To https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-13 23:54:00,752 [DEBUG] ! [rejected]        main -> main (fetch first)
+2026-08-13 23:54:00,752 [DEBUG] error: failed to push some refs to 'https://github.com/MoRDekai1364/Open_Tune_Sync.git'
+2026-08-13 23:54:00,765 [DEBUG] hint: Updates were rejected because the remote contains work that you do not
+2026-08-13 23:54:00,765 [DEBUG] hint: have locally. This is usually caused by another repository pushing to
+2026-08-13 23:54:00,765 [DEBUG] hint: the same ref. If you want to integrate the remote changes, use
+2026-08-13 23:54:00,766 [DEBUG] hint: 'git pull' before pushing again.
+2026-08-13 23:54:00,766 [DEBUG] hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+2026-08-13 23:54:00,778 [ERROR] Error: git push exited with code 1

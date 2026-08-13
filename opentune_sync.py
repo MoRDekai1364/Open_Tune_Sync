@@ -327,22 +327,22 @@ def yt_playlists():
              "thumbnail": (i["snippet"].get("thumbnails",{}).get("default",{}).get("url","")),
              "published_at": i["snippet"].get("publishedAt","")} for i in raw]
 
-def yt_create_playlist(title, privacy="private"):
-    token = _valid_token()
+def yt_create_playlist(title, privacy="private", idx=None):
+    token = _valid_token(idx)
     body  = json.dumps({"snippet":{"title":title},"status":{"privacyStatus":privacy}}).encode()
     data  = _http(f"{YT_API}/playlists?part=snippet,status", method="POST", body=body,
                   headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
     return data["id"]
 
-def yt_add_video(playlist_id, video_id):
-    token = _valid_token()
+def yt_add_video(playlist_id, video_id, idx=None):
+    token = _valid_token(idx)
     body  = json.dumps({"snippet":{"playlistId":playlist_id,
                                    "resourceId":{"kind":"youtube#video","videoId":video_id}}}).encode()
     _http(f"{YT_API}/playlistItems?part=snippet", method="POST", body=body,
           headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
 
-def yt_playlist_video_ids(playlist_id):
-    token = _valid_token()
+def yt_playlist_video_ids(playlist_id, idx=None):
+    token = _valid_token(idx)
     items = _http_pages(
         f"{YT_API}/playlistItems?part=contentDetails&playlistId={playlist_id}&maxResults=50",
         token, "items")
@@ -456,11 +456,13 @@ def _fmt_eta(secs):
     h, r = divmod(secs, 3600); m, s = divmod(r, 60)
     return f"{h}h {m}m {s}s" if h else f"{m}m {s}s"
 
-def _build_tasks(cfg_data, job):
+def _build_tasks(cfg_data, job, cred_idx=None):
     """
     Reconstruct the full task list from cfg_data.
     For create_new, already-created YT playlist IDs survive in
     cfg_data['created_playlists'] so we never double-create on resume.
+    cred_idx pins which credential/account new playlists are created
+    under, independent of whatever the app's global active account is.
     """
     mode, tasks = cfg_data["mode"], []
 
@@ -479,7 +481,7 @@ def _build_tasks(cfg_data, job):
                 pl_name = row["name"] if row else pid
                 job["current_action"] = f"Creating: {pl_name}"
                 persist_job(job)
-                created[pid] = yt_create_playlist(pl_name, cfg_data.get("privacy","private"))
+                created[pid] = yt_create_playlist(pl_name, cfg_data.get("privacy","private"), idx=cred_idx)
                 persist_job(job)   # save created_playlists immediately
                 time.sleep(0.3)
             for s in backup_songs(playlist_id=pid, per_page=99999)["songs"]:
@@ -493,7 +495,7 @@ def _build_tasks(cfg_data, job):
                 job["current_action"] = f"Creating: {cfg_data['new_playlist_name']}"
                 persist_job(job)
                 created["custom"] = yt_create_playlist(
-                    cfg_data["new_playlist_name"], cfg_data.get("privacy", "private"))
+                    cfg_data["new_playlist_name"], cfg_data.get("privacy", "private"), idx=cred_idx)
                 persist_job(job)
             yt_id = created["custom"]
         meta_cache = G.get("yt_meta_cache", {})
@@ -539,10 +541,14 @@ def run_job(job_id, cfg_data):
     if "failed_songs"     not in job: job["failed_songs"]     = []
     if "skipped_existing" not in job: job["skipped_existing"] = 0
     job["pause_requested"] = False
+    job_cred_idx = cfg_data.get("cred_idx")
+    if job_cred_idx is None:
+        job_cred_idx = G.get("active_cred", 0)
+        cfg_data["cred_idx"] = job_cred_idx
     persist_job(job)
 
     try:
-        tasks = _build_tasks(cfg_data, job)
+        tasks = _build_tasks(cfg_data, job, cred_idx=job_cred_idx)
         already_uploaded = len(job["_uploaded"])
 
         job["total"]     = len(tasks)
@@ -558,7 +564,7 @@ def run_job(job_id, cfg_data):
         yt_existing: dict = {}
         for yt_id in unique_yt_ids:
             try:
-                yt_existing[yt_id] = yt_playlist_video_ids(yt_id)
+                yt_existing[yt_id] = yt_playlist_video_ids(yt_id, idx=job_cred_idx)
             except Exception:
                 yt_existing[yt_id] = set()
 
@@ -601,7 +607,7 @@ def run_job(job_id, cfg_data):
 
             # ── Upload ───────────────────────────────────────────────────
             try:
-                yt_add_video(yt_id, vid)
+                yt_add_video(yt_id, vid, idx=job_cred_idx)
                 job["_uploaded"].add(vid)
                 job["completed"] += 1
                 session_done     += 1
@@ -612,11 +618,13 @@ def run_job(job_id, cfg_data):
                 msg = str(e)
                 if "403" in msg or "429" in msg or "quota" in msg.lower():
                     # ── Try rotating to the next connected credential ─────
-                    cur = G.get("active_cred", 0)
+                    # (scoped to this job only — the app's global active
+                    # account is left untouched)
+                    cur = job_cred_idx
                     nxt = next_connected_cred(cur)
                     if nxt is not None:
-                        G["active_cred"] = nxt
-                        cfg = cfg_load(); cfg["active_cred"] = nxt; cfg_save(cfg)
+                        job_cred_idx = nxt
+                        cfg_data["cred_idx"] = nxt
                         job["current_action"] = (
                             f"Quota hit on project {cur+1} — switching to project {nxt+1}…")
                         persist_job(job)
@@ -903,6 +911,7 @@ def api_csv_match():
 @app.route("/api/sync/start", methods=["POST"])
 def start_sync():
     d = request.json or {}; jid = str(uuid.uuid4())[:8]
+    d.setdefault("cred_idx", G.get("active_cred", 0))
     job = {"id": jid, "status": "pending", "mode": d.get("mode",""),
            "created_at": time.time(), "total": 0, "completed": 0, "failed": 0,
            "skipped_existing": 0, "eta_str": "--:--", "rate": 0,
