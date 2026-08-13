@@ -1,0 +1,39 @@
+2026-08-13 23:47:11,664 [INFO] Source folder: D:\Programming\Personal_projects_D\Open_Tune_Sync
+2026-08-13 23:47:11,664 [INFO] Temp log: C:\Users\MORDEK~1\AppData\Local\Temp\push_to_github_20260813_234711.log
+2026-08-13 23:47:11,665 [DEBUG] Running: git --version
+2026-08-13 23:47:11,906 [DEBUG] stdout: git version 2.55.0.windows.2
+2026-08-13 23:47:11,906 [DEBUG] stderr: 
+2026-08-13 23:47:11,907 [INFO] No git repository found in this folder. Initializing.
+2026-08-13 23:47:11,907 [DEBUG] Running: git init
+2026-08-13 23:47:12,124 [DEBUG] stdout: Initialized empty Git repository in D:/Programming/Personal_projects_D/Open_Tune_Sync/.git/
+2026-08-13 23:47:12,125 [DEBUG] stderr: 
+2026-08-13 23:47:12,127 [DEBUG] Running: git checkout -b main
+2026-08-13 23:47:12,297 [DEBUG] stdout: 
+2026-08-13 23:47:12,297 [DEBUG] stderr: Switched to a new branch 'main'
+2026-08-13 23:47:12,297 [DEBUG] Running: git remote -v
+2026-08-13 23:47:12,450 [DEBUG] stdout: 
+2026-08-13 23:47:12,450 [DEBUG] stderr: 
+2026-08-13 23:47:14,206 [INFO] Verifying repository access.
+2026-08-13 23:47:14,207 [DEBUG] Running: git ls-remote https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-13 23:47:15,463 [DEBUG] stdout: 3917d0015667bb8a9ae086a9ae7c9f66ab81d018	HEAD
+3917d0015667bb8a9ae086a9ae7c9f66ab81d018	refs/heads/main
+2026-08-13 23:47:15,463 [DEBUG] stderr: 
+2026-08-13 23:47:15,464 [DEBUG] Running: git remote add origin https://github.com/MoRDekai1364/Open_Tune_Sync.git
+2026-08-13 23:47:15,650 [DEBUG] stdout: 
+2026-08-13 23:47:15,650 [DEBUG] stderr: 
+2026-08-13 23:47:15,650 [DEBUG] Running: git branch --list
+2026-08-13 23:47:15,812 [DEBUG] stdout: 
+2026-08-13 23:47:15,812 [DEBUG] stderr: 
+2026-08-13 23:47:15,812 [DEBUG] Running: git ls-remote --heads origin
+2026-08-13 23:47:16,630 [DEBUG] stdout: 3917d0015667bb8a9ae086a9ae7c9f66ab81d018	refs/heads/main
+2026-08-13 23:47:16,630 [DEBUG] stderr: 
+2026-08-13 23:47:16,630 [INFO] Detected branches:
+2026-08-13 23:47:16,631 [INFO]   1. main
+2026-08-13 23:47:16,631 [INFO]   2. Enter a new branch name
+2026-08-13 23:47:17,721 [DEBUG] Running: git branch --list
+2026-08-13 23:47:17,888 [DEBUG] stdout: 
+2026-08-13 23:47:17,888 [DEBUG] stderr: 
+2026-08-13 23:47:17,888 [DEBUG] Running: git checkout -b main
+2026-08-13 23:47:18,058 [DEBUG] stdout: 
+2026-08-13 23:47:18,058 [DEBUG] stderr: Switched to a new branch 'main'
+2026-08-13 23:47:21,072 [ERROR] No commit message provided.
